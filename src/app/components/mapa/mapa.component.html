@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-title>
+        Mapa
+    </mat-card-title>
+    <mat-card-content>
+        <!-- (mapClick) es un evento que se ejecuta al pinchar en alguna zona del mapa. Sacado de:https://angular-maps.com/api-docs/agm-core/components/agmmap -->
+        <agm-map (mapClick)="agregarMarcador($event)" [latitude]="lat" [longitude]="lng" [zoom]="15">
+            <agm-marker *ngFor="let marcador of marcadores; let i=index" [latitude]="marcador.lat" [longitude]="marcador.lng">
+                <agm-info-window>
+                    <strong>{{marcador.titulo}}</strong>
+                    <p>{{marcador.desc}}</p>
+                    <div>
+                        <button mat-raised-button color="primary" (click)="editarMarcador(marcador)">Editar</button>
+                        <button mat-raised-button color="warn" type="button" (click)="borrarMarcador(i)">Borrar</button>
+                    </div>
+                </agm-info-window>
+            </agm-marker>
+        </agm-map>
+    </mat-card-content>
+</mat-card>
